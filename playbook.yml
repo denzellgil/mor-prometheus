@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install update (Ubuntu)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Install Prometheus for Ubuntu Server
+    include_role:
+      name: prometheus
+    when: ansible_distribution == "Ubuntu"
